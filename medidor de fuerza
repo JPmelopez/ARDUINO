@@ -1,0 +1,18 @@
+const int pressurePin = A0;  // Pin analógico donde está conectado el sensor de presión
+const float VCC = 5.0;       // Voltaje de alimentación del Arduino
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int pressureRaw = analogRead(pressurePin);    // Lee el valor analógico del sensor de presión
+  float pressureVoltage = pressureRaw * VCC / 1023.0;   // Convierte el valor analógico a voltaje
+  float pressure = (pressureVoltage - 0.5) * 100.0;   // Convierte el voltaje a fuerza de presión (en Newtons)
+  
+  Serial.print("Fuerza de presión: ");
+  Serial.print(pressure);
+  Serial.println(" N");
+  
+  delay(1000);   // Espera un segundo antes de tomar otra lectura
+}
